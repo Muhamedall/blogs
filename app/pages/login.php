@@ -39,7 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             session_start();
             if ( $_SESSION['admin'] = true) {
            
-            header("Location: " . ROOT . "/admine");
+            header("Location: " . ROOT . "/admin");
 
             exit();
         } else {
