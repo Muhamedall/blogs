@@ -26,7 +26,7 @@ if (!file_exists($filename)) {
 if ($section == 'categories') {
     require_once "../app/pages/admin/categories-controller.php";
 } elseif ($section == 'posts') {
-    require_once "..app/pages/admin/posts-controller.php";
+    require_once "../app/pages/admin/posts-controller.php";
 }
 ?>
 
@@ -239,7 +239,7 @@ if ($section == 'categories') {
               </div>
             </li>
             <li>
-              <a   <?php $section =='dashboard' ? 'active':''?>        href="<?=ROOT?>/admine" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-[#00AAA1] dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+              <a   <?php $section =='dashboard' ? 'active':''?>        href="<?=ROOT?>/admin" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-[#00AAA1] dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                 <span class="inline-flex justify-center items-center ml-4">
                   <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                 </span>
@@ -255,7 +255,7 @@ if ($section == 'categories') {
               </a>
             </li>
             <li>
-            <a   <?=$section =='posts' ? 'active':''?>  href="<?=ROOT?>/admin/posts" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-[#00AAA1] dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
+            <a <?=$section =='posts' ? 'active':''?>  href="<?=ROOT?>/admin/posts" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-[#00AAA1] dark:hover:bg-gray-600 text-white-600 hover:text-white-800 border-l-4 border-transparent hover:border-blue-500 dark:hover:border-gray-800 pr-6">
                 <span class="inline-flex justify-center items-center ml-4">
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M120-120v-720h720v720H120Zm600-160H240v60h480v-60Zm-480-60h480v-60H240v60Zm0-140h480v-240H240v240Zm0 200v60-60Zm0-60v-60 60Zm0-140v-240 240Zm0 80v-80 80Zm0 120v-60 60Z"/></svg>                </span>
                 <span class="ml-2 text-sm tracking-wide truncate">Posts</span>
