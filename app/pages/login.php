@@ -2,7 +2,6 @@
 $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Check if email and password are provided
     if (empty($_POST["email"])) {
         $errors['email'] = "Email is required";
     }
@@ -11,9 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $errors['password'] = "Password is required";
     }
 
-    // If no errors, attempt to authenticate
     if (empty($errors)) {
-        // Establish a MySQL database connection (replace these values with your actual database credentials)
         $servername = "localhost";
         $username = "root";
         $password = "";
@@ -26,11 +23,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        // Sanitize user inputs
+        
         $email = mysqli_real_escape_string($conn, $_POST['email']);
         $password = mysqli_real_escape_string($conn, $_POST['password']);
 
-        // Query the admins table
+        //  admins table
         $sql = "SELECT * FROM admins WHERE email='$email' AND password='$password'";
         $result = $conn->query($sql);
 
@@ -62,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!-- Add your CSS links here -->
+  
 </head>
 <body>
     <header>

@@ -91,7 +91,7 @@ function display_tables() {
         
         $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-        // Display the table names
+       
         echo "";
       
     } catch(PDOException $e) {

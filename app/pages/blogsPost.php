@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
-    <!-- Include Tailwind CSS -->
+
     <link href="https://cdn.tailwindcss.com" rel="stylesheet">
 </head>
 <body>
-    <!-- Blog Section Start -->
+
     <section class="mt-[2%]">
         <div class="container mx-auto">
             <div class="flex flex-wrap -mx-4">
                 <?php
-                // Fetch posts from the database
+             
                 require_once "../app/core/connection.php";
                 $conn = get_connection();
                 $stmt = $conn->query("SELECT * FROM posts ORDER BY created_at DESC");
                 $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                // Loop through each postz
+             
                 foreach ($posts as $post) {
                     $category_id = $post['category_id'];
                     $category_stmt = $conn->prepare("SELECT name FROM categories WHERE category_id = :category_id");
@@ -27,7 +27,6 @@
                     $category_stmt->execute();
                     $category_name = $category_stmt->fetchColumn();
 
-                    // Output HTML for each post
                     ?>
                     <div class="w-full md:w-1/2 lg:w-1/3 px-4 border ">
                         <div class="max-w-[370px] mx-auto mb-10">
@@ -66,6 +65,6 @@
             </div>
         </div>
     </section>
-    <!-- Blog Section End -->
+   
 </body>
 </html>

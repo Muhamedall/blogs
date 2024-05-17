@@ -34,7 +34,7 @@ if ($section == 'categories') {
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
-  /* Compiled dark classes from Tailwind */
+ 
   .dark .dark\:divide-gray-700 > :not([hidden]) ~ :not([hidden]) {
     border-color: rgba(55, 65, 81);
   }
@@ -157,7 +157,7 @@ if ($section == 'categories') {
 <div x-data="setup()" :class="{ 'dark': isDark }">
     <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
 
-      <!-- Header -->
+
       <div class="fixed w-full flex items-center justify-between h-14 text-slate-950 font text-sm   font-bold dark:text-white z-10">
         <div class="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-[#E8F3F3] dark:bg-gray-800 border-none">
           <img class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden" src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
@@ -227,9 +227,7 @@ if ($section == 'categories') {
           </ul>
         </div>
       </div>
-      <!-- ./Header -->
-    
-      <!-- Sidebar -->
+     
       <div class="fixed flex flex-col top-14 left-0 w-14 hover:w-64 md:w-64 bg-[#E8F3F3] text-sm   font-bold text-slate-950 dark:bg-gray-900 h-full dark:text-white transition-all duration-300 border-none z-10 sidebar">
         <div class="overflow-y-auto overflow-x-hidden flex flex-col justify-between flex-grow">
           <ul class="flex flex-col py-4 space-y-1">
@@ -300,9 +298,9 @@ if ($section == 'categories') {
           <p class="mb-14 px-5 py-3 hidden md:block text-center text-xs">Copyright @<?php echo  date('Y') ;?></p>
         </div>
       </div>
-      <!-- ./Sidebar -->
     
-      <div class="h-full ml-14 mt-14 mb-10 md:ml-64  dark:bg-gray-600">
+    
+      <div class="h-full ml-14 mt-14 mb-10 md:ml-64   dark:bg-gray-600">
       
       <?php
 require_once $filename;
