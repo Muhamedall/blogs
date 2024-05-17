@@ -1,6 +1,4 @@
 <?php
-
-// Function to establish a database connection
 function get_connection() {
     $servername = "localhost";
     $username = "root";
@@ -8,28 +6,31 @@ function get_connection() {
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=myblogs_db", $username, $password);
-        // Set the PDO error mode to exception
+     
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "";
-
         return $conn;
        
     } catch(PDOException $e) {
-        // If connection fails, die and display error message
+       
         die("Connection failed: " . $e->getMessage());
     }
 }
 
-// Function to create database tables
+
 function create_tables() {
-    $conn = get_connection(); // Get database connection
+    $conn = get_connection(); 
 
     try {
-        // Create tables
+       
         $conn->exec("CREATE TABLE IF NOT EXISTS admins (
             admin_id INT AUTO_INCREMENT PRIMARY KEY,
             email VARCHAR(50) NOT NULL,
             password VARCHAR(255) NOT NULL
+        )");
+
+        $conn->exec("CREATE TABLE IF NOT EXISTS categories (
+            category_id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(50) NOT NULL
         )");
 
         $conn->exec("CREATE TABLE IF NOT EXISTS posts (
@@ -37,6 +38,7 @@ function create_tables() {
             title VARCHAR(100) NOT NULL,
             content TEXT NOT NULL,
             category_id INT NOT NULL,
+            image_or_video_url VARCHAR(255),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
             FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
@@ -57,32 +59,48 @@ function create_tables() {
             email VARCHAR(100) NOT NULL,
             subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )");
-
-        $conn->exec("CREATE TABLE IF NOT EXISTS categories (
-            category_id INT AUTO_INCREMENT PRIMARY KEY,
-            name VARCHAR(50) NOT NULL
-        )");
-
-        echo "";
     } catch(PDOException $e) {
-        // If an error occurs, display the error message
+       
         echo "Error creating tables: " . $e->getMessage();
     }
 }
 
-// Call the function to create tables
+
 create_tables();
 
-// Function to display existing tables
-// Function to display existing tables
+
 function display_tables() {
-    $conn = get_connection(); // Get database connection
+    $conn = get_connection();
 
-   
+    try {
+        
+        $query = "SELECT table_name FROM information_schema.tables WHERE table_schema = :dbname";
+        
+       
+        $stmt = $conn->prepare($query);
+        
+       
+        $stmt->bindParam(':dbname', $dbname, PDO::PARAM_STR);
+        
+      
+        $dbname = "myblogs_db"; 
+        
+       
+        $stmt->execute();
+        
+        
+        $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+        // Display the table names
+        echo "";
+      
+    } catch(PDOException $e) {
+      
+        echo "Error displaying tables: " . $e->getMessage();
+    }
 }
-// Function to display attributes of existing tables
 
-// Call the function to display tables
+
 display_tables();
 
 ?>

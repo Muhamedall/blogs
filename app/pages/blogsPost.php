@@ -3,235 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Blog</title>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.tailwindcss.com" rel="stylesheet">
 </head>
 <body>
-    <!-- component -->
-<link rel="stylesheet" href="https://cdn.tailgrids.com/tailgrids-fallback.css" />
+    <!-- Blog Section Start -->
+    <section class="mt-[2%]">
+        <div class="container mx-auto">
+            <div class="flex flex-wrap -mx-4">
+                <?php
+                // Fetch posts from the database
+                require_once "../app/core/connection.php";
+                $conn = get_connection();
+                $stmt = $conn->query("SELECT * FROM posts ORDER BY created_at DESC");
+                $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+                // Loop through each postz
+                foreach ($posts as $post) {
+                    $category_id = $post['category_id'];
+                    $category_stmt = $conn->prepare("SELECT name FROM categories WHERE category_id = :category_id");
+                    $category_stmt->bindParam(':category_id', $category_id);
+                    $category_stmt->execute();
+                    $category_name = $category_stmt->fetchColumn();
 
-<!-- ====== Blog Section Start -->
-<section class="mt-[2%]">
-   <div class="">
-    
-      <div class="flex flex-wrap -mx-4">
-        
-         <div class="w-full md:w-1/2 lg:w-1/3 px-4">
-            <div class="max-w-[370px] mx-auto mb-10">
-               <div class="rounded overflow-hidden mb-8">
-               <span
-                     class="
-                     bg-[#DFF1F0]
-                     rounded
-                     inline-block
-                     text-center
-                     py-1
-                     px-4
-                     text-xs
-                     leading-loose
-                     font-semibold
-                     
-                     mb-5
-                     "
-                     >
-                    Travel
-                  
-                  </span>
-                  <img
-                     src="https://cdn.tailgrids.com/1.0/assets/images/blogs/blog-01/image-01.jpg"
-                     alt="image"
-                     class="w-full"
-                     />
-               </div>
-               <div>
-               
-                  <span
-                     class="
-                     bg-primary
-                     rounded
-                     inline-block
-                     text-center
-                     py-1
-                     px-4
-                     text-xs
-                     leading-loose
-                     font-semibold
-                     text-white
-                     mb-5
-                     "
-                     >
-                  Dec 22, 2023
-                  </span>
-                  <h3>
-                     <a
-                        href="javascript:void(0)"
-                        class="
-                        font-semibold
-                        text-xl
-                        sm:text-2xl
-                        lg:text-xl
-                        xl:text-2xl
-                        mb-4
-                        inline-block
-                        text-dark
-                        hover:text-primary
-                        "
-                        >
-                     Meet AutoManage, the best AI management tools
-                     </a>
-                  </h3>
-                  <p class="text-base text-body-color">
-                     Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry.
-                  </p>
-               </div>
+                    // Output HTML for each post
+                    ?>
+                    <div class="w-full md:w-1/2 lg:w-1/3 px-4 border ">
+                        <div class="max-w-[370px] mx-auto mb-10">
+                            <div class="rounded overflow-hidden ">
+                                
+                                <div class="">
+                                <img src="<?php echo $post['image_or_video_url']; ?>" alt="Post Image" class="rounded-lg p-3 h-[200px] w-[300px]">
+                                <span class="bg-[#DFF1F0] rounded inline-block text-center py-1 px-4 text-xs leading-loose font-semibold mb-5 ml-[10px] ">
+                                    <?php echo $category_name; ?>
+                                </span>
+                                </div>
+                            </div>
+                            <div class="ml-[4%]">
+                               
+                                <h3>
+                                    <a href="#" class="font-semibold text-xl sm:text-2xl lg:text-4xl xl:text-4xl mb-2 inline-block text-dark hover:text-primary">
+                                        <?php echo $post['title']; ?>
+                                    </a>
+                                </h3>
+                               
+                                <p class="text-base text-body-color">
+                                    <?php echo $post['content']; ?>
+                                </p>
+                                <span class="  rounded  py-1 px-4 text-xs  text-slate-950  mr-[4px]">
+                                    <?php echo date("F j, Y", strtotime($post['created_at'])); ?>
+                                </span>
+                            </div>
+                            
+                            
+                           
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
             </div>
-         </div>
-         <div class="w-full md:w-1/2 lg:w-1/3 px-4">
-            <div class="max-w-[370px] mx-auto mb-10">
-               <div class="rounded overflow-hidden mb-8">
-               <span
-                     class="
-                     bg-[#DFF1F0]
-                     rounded
-                     inline-block
-                     text-center
-                     py-1
-                     px-4
-                     text-xs
-                     leading-loose
-                     font-semibold
-                     
-                     mb-5
-                     "
-                     >
-                    Sport
-                  
-                  </span>
-                  <img
-                     src="https://cdn.tailgrids.com/1.0/assets/images/blogs/blog-01/image-02.jpg"
-                     alt="image"
-                     class="w-full"
-                     />
-               </div>
-               <div>
-                  <span
-                     class="
-                     bg-primary
-                     rounded
-                     inline-block
-                     text-center
-                     py-1
-                     px-4
-                     text-xs
-                     leading-loose
-                     font-semibold
-                     text-white
-                     mb-5
-                     "
-                     >
-                  Mar 15, 2023
-                  </span>
-                  <h3>
-                     <a
-                        href="javascript:void(0)"
-                        class="
-                        font-semibold
-                        text-xl
-                        sm:text-2xl
-                        lg:text-xl
-                        xl:text-2xl
-                        mb-4
-                        inline-block
-                        text-dark
-                        hover:text-primary
-                        "
-                        >
-                     How to earn more money as a wellness coach
-                     </a>
-                  </h3>
-                  <p class="text-base text-body-color">
-                     Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry.
-                  </p>
-               </div>
-            </div>
-         </div>
-         <div class="w-full md:w-1/2 lg:w-1/3 px-4">
-            <div class="max-w-[370px] mx-auto mb-10">
-               <div class="rounded overflow-hidden mb-8">
-               <span
-                     class="
-                     bg-[#DFF1F0]
-                     rounded
-                     inline-block
-                     text-center
-                     py-1
-                     px-4
-                     text-xs
-                     leading-loose
-                     font-semibold
-                     
-                     mb-5
-                     "
-                     >
-                    programation
-                  
-                  </span>
-                  <img
-                  
-                     src="https://cdn.tailgrids.com/1.0/assets/images/blogs/blog-01/image-03.jpg"
-                     alt="image"
-                     class="w-full"
-                     />
-               </div>
-               <div>
-                  <span
-                     class="
-                     bg-primary
-                     rounded
-                     inline-block
-                     text-center
-                     py-1
-                     px-4
-                     text-xs
-                     leading-loose
-                     font-semibold
-                     text-white
-                     mb-5
-                     "
-                     >
-                  Jan 05, 2023
-                  </span>
-                  <h3>
-                     <a
-                        href="javascript:void(0)"
-                        class="
-                        font-semibold
-                        text-xl
-                        sm:text-2xl
-                        lg:text-xl
-                        xl:text-2xl
-                        mb-4
-                        inline-block
-                        text-dark
-                        hover:text-primary
-                        "
-                        >
-                     The no-fuss guide to upselling and cross selling
-                     </a>
-                  </h3>
-                  <p class="text-base text-body-color">
-                     Lorem Ipsum is simply dummy text of the printing and
-                     typesetting industry.
-                  </p>
-                  
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</section>
-<!-- ====== Blog Section End -->
+        </div>
+    </section>
+    <!-- Blog Section End -->
 </body>
 </html>

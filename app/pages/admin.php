@@ -302,13 +302,14 @@ if ($section == 'categories') {
       </div>
       <!-- ./Sidebar -->
     
-      <div class="h-full ml-14 mt-14 mb-10 md:ml-64 bg-[#00AAA1] dark:bg-gray-600">
+      <div class="h-full ml-14 mt-14 mb-10 md:ml-64  dark:bg-gray-600">
       
       <?php
 require_once $filename;
 
 
 ?>
+
 
 </div>
 

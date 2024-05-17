@@ -44,10 +44,11 @@
 
 			</div>
 			<div>
-                <img class="w-[60%] rounded-lg drop-shadow-lg animated-image" src="Kiluua.jpg" alt="kilua">
+                <img src="../public/personne.jpg" alt="kilua" class="w-[60%] rounded-lg drop-shadow-lg animated-image" >
             </div>
 
 	
+			
 		
 		</div>
 		<main>
@@ -62,7 +63,7 @@
 		
 	</section>
 	
-	<footer class="mt-[100%]">
+	<footer class="">
 
 
 	   <?php  include "footer.php";  ?>
