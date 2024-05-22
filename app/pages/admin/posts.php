@@ -1,4 +1,5 @@
 <?php
+
 require_once "../app/core/connection.php";
 
 // Function to retrieve category ID by name or insert if not exists
@@ -21,7 +22,6 @@ function get_or_insert_category_id($category_name) {
             return $conn->lastInsertId();
         }
     } catch(PDOException $e) {
-        
         echo "Error: " . $e->getMessage();
     }
 }
@@ -34,7 +34,6 @@ function upload_file($file) {
     $filename = basename($file['name']);
   
     if (!move_uploaded_file($file['tmp_name'], $upload_dir . $filename)) {
-       
         return false;
     }
     // Return the file path
@@ -49,7 +48,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category_name = trim($_POST["category"]); 
     $image_or_video = $_FILES["image_or_video"]; 
 
-  
     if (!empty($title) && !empty($content) && !empty($category_name)) {
    
         try {
@@ -59,7 +57,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Check if file was uploaded
             if ($image_or_video['error'] === UPLOAD_ERR_OK) {
-                
                 $file_path = upload_file($image_or_video);
                 if ($file_path === false) {
                     // Handle file upload error
@@ -67,11 +64,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     exit();
                 }
             } else {
-              
                 $file_path = null;
             }
 
-           
             $stmt = $conn->prepare("INSERT INTO posts (title, content, category_id, image_or_video_url) VALUES (:title, :content, :category_id, :image_or_video_url)");
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':content', $content);
@@ -79,15 +74,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':image_or_video_url', $file_path, PDO::PARAM_STR);
             $stmt->execute();
 
-            
+            // Redirect after successful insertion
             header("Location: " . ROOT . "/admin");
             exit();
         } catch (PDOException $e) {
-          
             echo "Error: " . $e->getMessage();
         }
     } else {
-       
         echo "Title, content, and category are required!";
     }
 }
@@ -132,5 +125,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <?php include '../app/pages/admin/manager-posts.php';?>
 </body>
 
-
-      
