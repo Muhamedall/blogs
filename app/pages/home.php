@@ -5,7 +5,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Home <?= APP_NAME ?></title>
-	
 	<style>
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-20px); }
@@ -76,6 +75,17 @@
         <span class="ml-2">Next</span>
     </a>
 </div>
+
+<div class="flex flex-row  lg:ml-[3%]">
+			<h1 class="bg-[#00AAA1] text-[#FFFFFF] font-bold text-2xl">Youtube  </h1><span class="text-xl font-bold mt-2"> Posts<span>
+				
+
+			</div>
+      <div id="app">
+       
+    </div>
+<div class="grid grid-cols-6 gap-[2%]  w-[100%]" id="videos"></div>
+
     </section>
 
     <footer>
@@ -85,6 +95,34 @@
    
 </body>
 
+<script>
+  const apiKey = 'AIzaSyAPPrKa9BXeR3A5frXFgSFg2ZQapGqJ2a8';
+const channelId = 'UC4muHgvt5FNOUm-lxvMB6TQ';
 
+const apiUrl = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet&order=date&maxResults=10`;
+
+fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+        const videosContainer = document.getElementById('videos');
+
+        data.items.forEach(item => {
+            const videoId = item.id.videoId;
+            const title = item.snippet.title;
+
+            const videoElement = `
+                <div class="w-full h-64 text-center mt-5">
+                    <iframe class="rounded-lg w-full h-full" src="https://www.youtube.com/embed/${videoId}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <h2 class="text-sm mt-2">${title}</h2>
+                </div>
+                <hr>
+            `;
+
+            videosContainer.innerHTML += videoElement;
+        });
+    })
+    .catch(error => console.error('Error fetching YouTube videos:', error));
+
+</script>
 
 </html>
