@@ -15,7 +15,23 @@ function get_connection() {
         die("Connection failed: " . $e->getMessage());
     }
 }
+function get_today_posts_count($conn) {
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM posts WHERE DATE(created_at) = CURDATE()");
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
 
+function get_today_visitors_count($conn) {
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM visitors WHERE visit_date = CURDATE()");
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
+
+function get_new_subscribers_count($conn) {
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM subscribers WHERE DATE(subscribed_at) = CURDATE()");
+    $stmt->execute();
+    return $stmt->fetchColumn();
+}
 
 function create_tables() {
     $conn = get_connection(); 
@@ -59,6 +75,11 @@ function create_tables() {
             email VARCHAR(100) NOT NULL,
             subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )");
+        $conn->exec("CREATE TABLE IF NOT EXISTS visitors (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            visit_date DATE NOT NULL
+        )");
+        
     } catch(PDOException $e) {
        
         echo "Error creating tables: " . $e->getMessage();

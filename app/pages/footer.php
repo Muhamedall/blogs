@@ -1,3 +1,6 @@
+
+
+
 <footer class="bg-[#E8F3F3] font-sans dark:bg-gray-900">
     <div class="container px-6 py-12 mx-auto">
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
@@ -5,12 +8,13 @@
                 <h1 class="max-w-lg text-xl font-semibold tracking-tight text-gray-800 xl:text-2xl dark:text-white">Subscribe our newsletter to get an update.</h1>
 
                 <div class="flex flex-col mx-auto mt-6 space-y-3 md:space-y-0 md:flex-row">
-                    <input id="email" type="text" class="px-4 py-2 text-gray-700 bg-[#DFF1F0] border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300" placeholder="Email Address" />
-            
-                    <button class="w-full px-6 py-2.5 text-sm font-medium tracking-wider text-white transition-colors duration-300 transform md:w-auto md:mx-4 focus:outline-none bg-[#00AAA1] rounded-lg  focus:ring focus:ring-gray-300 focus:ring-opacity-80">
-                        Subscribe
-                    </button>
-                </div>
+    <input id="email" type="email" class="px-4 py-2 text-gray-700 bg-[#DFF1F0] border rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300" placeholder="Email Address" />
+
+    <button id="subscribeBtn" class="w-full px-6 py-2.5 text-sm font-medium tracking-wider text-white transition-colors duration-300 transform md:w-auto md:mx-4 focus:outline-none bg-[#00AAA1] rounded-lg focus:ring focus:ring-gray-300 focus:ring-opacity-80">
+        Subscribe
+    </button>
+</div>
+
             </div>
 
             <div>
@@ -55,3 +59,39 @@
         <p class="font-sans p-8 text-start md:text-center md:text-lg md:p-4">© <?php echo date('Y') ;?> You Company Inc. All rights reserved.</p>
     </div>
 </footer>
+<script>
+
+document.getElementById('subscribeBtn').addEventListener('click', function() {
+    var email = document.getElementById('email').value.trim();
+
+    if (email === '') {
+        alert('Please enter your email address');
+        return;
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '<?=ROOT?>/subscribe', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    alert('Subscription successful');
+                    document.getElementById('email').value = ''; 
+                } else {
+                    if (response.error === 'duplicate_email') {
+                        alert('Subscription failed: This email is already subscribed.');
+                    } else {
+                        alert('Subscription failed: ' + response.error);
+                    }
+                }
+            } else {
+                alert('Error: ' + xhr.status);
+            }
+        }
+    };
+    xhr.send('email=' + encodeURIComponent(email));
+});
+
+</script>
