@@ -1,4 +1,5 @@
 <?php
+
 function get_connection() {
     $servername = "localhost";
     $username = "root";
@@ -6,38 +7,17 @@ function get_connection() {
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=myblogs_db", $username, $password);
-     
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $conn;
-       
     } catch(PDOException $e) {
-       
         die("Connection failed: " . $e->getMessage());
     }
-}
-function get_today_posts_count($conn) {
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM posts WHERE DATE(created_at) = CURDATE()");
-    $stmt->execute();
-    return $stmt->fetchColumn();
-}
-
-function get_today_visitors_count($conn) {
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM visitors WHERE visit_date = CURDATE()");
-    $stmt->execute();
-    return $stmt->fetchColumn();
-}
-
-function get_new_subscribers_count($conn) {
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM subscribers WHERE DATE(subscribed_at) = CURDATE()");
-    $stmt->execute();
-    return $stmt->fetchColumn();
 }
 
 function create_tables() {
     $conn = get_connection(); 
 
     try {
-       
         $conn->exec("CREATE TABLE IF NOT EXISTS admins (
             admin_id INT AUTO_INCREMENT PRIMARY KEY,
             email VARCHAR(50) NOT NULL,
@@ -70,58 +50,47 @@ function create_tables() {
             FOREIGN KEY (post_id) REFERENCES posts(post_id) ON DELETE CASCADE
         )");
 
+        $conn->exec("CREATE TABLE IF NOT EXISTS replies (
+            reply_id INT AUTO_INCREMENT PRIMARY KEY,
+            comment_id INT NOT NULL,
+            reply TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (comment_id) REFERENCES comments(comment_id) ON DELETE CASCADE
+        )");
+
         $conn->exec("CREATE TABLE IF NOT EXISTS subscribers (
             subscriber_id INT AUTO_INCREMENT PRIMARY KEY,
             email VARCHAR(100) NOT NULL,
             subscribed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )");
+
         $conn->exec("CREATE TABLE IF NOT EXISTS visitors (
             id INT AUTO_INCREMENT PRIMARY KEY,
             visit_date DATE NOT NULL
         )");
         
     } catch(PDOException $e) {
-       
         echo "Error creating tables: " . $e->getMessage();
     }
 }
-
-
-create_tables();
-
 
 function display_tables() {
     $conn = get_connection();
 
     try {
-        
         $query = "SELECT table_name FROM information_schema.tables WHERE table_schema = :dbname";
-        
-       
         $stmt = $conn->prepare($query);
-        
-       
         $stmt->bindParam(':dbname', $dbname, PDO::PARAM_STR);
-        
-      
         $dbname = "myblogs_db"; 
-        
-       
         $stmt->execute();
-        
-        
         $tables = $stmt->fetchAll(PDO::FETCH_COLUMN);
-
-       
         echo "";
-      
     } catch(PDOException $e) {
-      
         echo "Error displaying tables: " . $e->getMessage();
     }
 }
 
-
+create_tables();
 display_tables();
 
 ?>
