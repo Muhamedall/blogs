@@ -38,13 +38,13 @@
     <?php include "header.php" ?>
     <section class="mt-[3%]">
         <div class="static flex flex-row lg:gap-[40%]  ">
-            <div class=" description   lg:w-[20%] ml-[10%]">
+            <div class=" description   lg:w-[50%] ml-[10%]">
                 <h2 class=" absolute ml-[10%] mt-[90%] lg:mt-[5%] lg:relative  text-2xl font-bold animated-paragraph ">
                     A dedicated blogger and passionate about triathlon, oversees various activities related to the sport.
                 </h2>
             </div>
             <div>
-                <img src="../app/pages/mrdiaa.jpg" alt="mr-diaa" class="  lg:w-[60%] rounded-lg drop-shadow-lg animated-image">
+                <img src="../app/pages/mrdiaa.jpg" alt="mr-diaa" class="  lg:w-[80%] rounded-lg drop-shadow-lg animated-image">
             </div>
         </div>
         <div class="mt-[70%] lg:mt-[5%]">

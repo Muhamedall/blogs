@@ -58,11 +58,40 @@ $posts = get_posts();
                     </td>
                     <td class="px-6 py-4 flex flex-row gap-4">
                         <a href="<?=ROOT?>/admin/edit_post?post_id=<?php echo $post['post_id']; ?>" class="btn-edit"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#78A75A"><path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/></svg></a>
-                        <a href="<?=ROOT?>/admin/delete_post?post_id=<?php echo $post['post_id']; ?>" class="btn-delete"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EA3323"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg></a>
+                        <a href="<?=ROOT?>/admin/delete_post?post_id=<?php echo $post['post_id']; ?>" class="btn-delete" onclick="return   confirm('Do you really want to delete your post?' )"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EA3323"><path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"/></svg></a>
                     </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+    <button id="addNewPostBtn" class="bg-[#00AAA1] text-white font-bold py-2 px-4 rounded mt-4">Add new post</button>
+
 </div>
+<script>
+    document.getElementById('addNewPostBtn').addEventListener('click', function() {
+    document.getElementById('postForm').style.display = 'block';
+    this.style.display = 'none';
+});
+
+document.getElementById('postForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    // Perform form submission via AJAX or regular submission
+    fetch(this.action, {
+        method: 'POST',
+        body: new FormData(this)
+    }).then(response => {
+        if (response.ok) {
+            this.reset();
+            document.getElementById('postForm').style.display = 'none';
+            document.getElementById('addNewPostBtn').style.display = 'block';
+        } else {
+            alert('Error submitting the form');
+        }
+    }).catch(error => {
+        console.error('Error:', error);
+    });
+});
+
+</script>
 

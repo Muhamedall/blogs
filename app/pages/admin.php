@@ -1,4 +1,5 @@
 <?php
+require_once '../app/pages/admin/profile-manager.php';
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
   header("Location: " . ROOT . "/login");
   exit();
@@ -160,15 +161,22 @@ elseif ($section == 'settings') {
       }        
   }
 </style>
-<div x-data="setup()" :class="{ 'dark': isDark }">
+<div x-data="setup()" :class="{ 'dark': isDark } ">
     <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-white dark:bg-gray-700 text-black dark:text-white">
 
-
       <div class="fixed w-full flex items-center justify-between h-14 text-slate-950 font text-sm   font-bold dark:text-white z-10">
-        <div class="flex items-center justify-start md:justify-center pl-3 w-14 md:w-64 h-14 bg-[#E8F3F3] dark:bg-gray-800 border-none">
-          <img class="w-7 h-7 md:w-10 md:h-10 mr-2 rounded-md overflow-hidden" src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
-          <span class="hidden md:block">ADMIN</span>
-        </div>
+      <div class="flex flex-row   pl-3 w-14 md:w-64 h-14 bg-[#E8F3F3] dark:bg-gray-800 border-none">
+    <?php if ($profile_picture):
+                                              $public_path = str_replace('../public', ROOT, $profile_picture   );
+
+                                              ?>
+        <img class="w-7 h-7 mt-[5%] md:w-10 md:h-10 mr-2 rounded-full overflow-hidden" src="<?= htmlspecialchars($public_path) ?>" />
+    <?php else: ?>
+        <img class="w-7 h-7 mt-[5%] md:w-10 md:h-10 mr-2 rounded-md overflow-hidden" src="https://therminic2018.eu/wp-content/uploads/2018/07/dummy-avatar.jpg" />
+    <?php endif; ?>
+    <span class="hidden md:block mt-[10%]">Mr Diaa</span>
+</div>
+
         <div class="flex justify-between items-center h-14 bg-[#E8F3F3] text-sm  font-bold  dark:bg-gray-800 header-right">
           <div class="bg-white rounded flex items-center w-full max-w-xl mr-4 p-2 shadow-sm border border-gray-200">
             <button class="outline-none focus:outline-none">
@@ -306,7 +314,7 @@ elseif ($section == 'settings') {
       </div>
     
     
-      <div class="h-full ml-14 mt-14 mb-10 md:ml-64   dark:bg-gray-600">
+      <div class="h-full ml-14 mt-[5%] mb-10 md:ml-64  dark:bg-gray-600">
       
       <?php
 require_once $filename;
