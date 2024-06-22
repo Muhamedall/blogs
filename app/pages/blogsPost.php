@@ -68,7 +68,7 @@ $currentPosts = $postsChunks[$currentSlide - 1];
                 <?php echo date("F j, Y", strtotime($post['created_at'])); ?>
             </span>
             <!-- Add a unique ID to each button -->
-            <button class="details-btn" data-post-id="<?php echo $post['post_id']; ?>" onclick="showPostDetails(<?php echo $post['post_id']; ?>)">Details</button>
+            <button type="button" class="details-btn text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2" data-post-id="<?php echo $post['post_id']; ?>" onclick="showPostDetails(<?php echo $post['post_id']; ?>)">Details</button>
         </div>
     </div>
 </div>

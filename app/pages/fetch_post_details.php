@@ -78,9 +78,9 @@ if (isset($_GET['post_id'])) {
             <span class="rounded py-1 px-4 text-xs text-slate-950 mr-[4px]">
                 <?php echo date("F j, Y", strtotime($post['created_at'])); ?>
             </span>
-            <div class="flex items-center justify-center">
-                <div class="px-10">
-                    <div class="bg-white max-w-xl rounded-2xl px-5 py-5 shadow-lg hover:shadow-2xl transition duration-500">
+            <div class="flex items-center justify-center ">
+                <div class=" p-[10%] ">
+                    <div class="bg-wight w-[400%] h-[100%]  p-[5%]  rounded-2xl  shadow-lg hover:shadow-2xl transition duration-500">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Zm126-240h594v-480H160v525l46-45Zm-46 0v-480 480Z"/></svg>
                         <div class="mt-4">
                             <h1 class="text-lg text-gray-700 font-semibold hover:underline cursor-pointer">Comments</h1>
@@ -144,7 +144,7 @@ if (isset($_GET['post_id'])) {
             </div>
         </div>
         <div>
-            <p class="lg:mt-[50%] lg:ml-[30%] text-lg font-medium"><?php echo $post['content']; ?></p>
+            <p class="lg:mt-[50%] lg:ml-[2%] text-lg font-medium"><?php echo $post['content']; ?></p>
         </div>
     </section>
 
