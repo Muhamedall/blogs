@@ -12,7 +12,7 @@ if (isset($_GET['post_id'])) {
         
         // Check if a new file is uploaded
         if (isset($_FILES['image_or_video']) && $_FILES['image_or_video']['error'] == UPLOAD_ERR_OK) {
-            $target_dir = "uploads/";
+            $target_dir = "../public/uploads/";
             $target_file = $target_dir . basename($_FILES["image_or_video"]["name"]);
             if (move_uploaded_file($_FILES["image_or_video"]["tmp_name"], $target_file)) {
                 $image_or_video_url = $target_file;

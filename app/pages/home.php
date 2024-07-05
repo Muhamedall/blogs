@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -150,6 +152,71 @@
                 })
                 .catch(error => console.error('Error fetching today\'s update:', error));
         });
+      
+        document.getElementById('search-button').addEventListener('click', function() {
+            performSearch();
+        });
+
+        document.getElementById('search-input').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        function performSearch() {
+            const searchTerm = document.getElementById('search-input').value.trim();
+
+            if (searchTerm.length === 0) {
+                clearSearchResults();
+                return;
+            }
+
+            // Perform AJAX request to search PHP scripts
+            searchPosts(searchTerm);
+            searchVideos(searchTerm);
+        }
+
+        function searchPosts(searchTerm) {
+            fetch(`search_posts.php?q=${encodeURIComponent(searchTerm)}`)
+                .then(response => response.json())
+                .then(data => {
+                    displaySearchResults(data, 'Posts');
+                })
+                .catch(error => console.error('Error searching posts:', error));
+        }
+
+        function searchVideos(searchTerm) {
+            fetch(`search_videos.php?q=${encodeURIComponent(searchTerm)}`)
+                .then(response => response.json())
+                .then(data => {
+                    displaySearchResults(data.items, 'Videos'); // Assuming data structure matches YouTube API response
+                })
+                .catch(error => console.error('Error searching videos:', error));
+        }
+
+        function displaySearchResults(results, type) {
+            const searchResultsContainer = document.getElementById('search-results');
+            let html = `<h2 class="font-bold mt-2">${type}</h2>`;
+
+            if (results.length > 0) {
+                results.forEach(result => {
+                    if (type === 'Videos') {
+                        html += `<div class="mt-2"><h3 class="text-blue-600">${result.snippet.title}</h3><p>${result.snippet.description}</p></div>`;
+                    } else {
+                        html += `<div class="mt-2"><h3 class="text-blue-600">${result.title}</h3><p>${result.content}</p></div>`;
+                    }
+                });
+            } else {
+                html += '<p>No results found.</p>';
+            }
+
+            searchResultsContainer.innerHTML = html;
+        }
+
+        function clearSearchResults() {
+            document.getElementById('search-results').innerHTML = '';
+        }
+
     </script>
 </body>
 </html>
