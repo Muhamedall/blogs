@@ -1,3 +1,9 @@
+<?php
+require_once "../app/core/connection.php";
+
+$is_admin = isset($_SESSION['admin']) && $_SESSION['admin'] === true;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,7 +54,7 @@
                 </p>
             </div>
         </div>
-
+        
         <div class="mt-[5%] flex flex-col items-center">
             <img src="../app/pages/team.jpg" alt="Our Team" class="w-[80%] lg:w-[50%] rounded-lg drop-shadow-lg animated-image">
             <h2 class="text-2xl font-bold mt-4 animated-paragraph">Meet Our Team</h2>
@@ -76,6 +82,33 @@
                 </p>
             </div>
         </div>
+
+        <?php if ($is_admin) { ?>
+            <div class="mt-2 w-[80%] lg:w-[50%] mx-auto">
+                <h3 class="text-2xl font-bold text-center mb-4">Edit About Us Content</h3>
+                <form action="edit_about.php" method="post" class="bg-white p-6 rounded-lg shadow-md">
+                    <div class="mb-4">
+                        <label for="about_content" class="block text-gray-700 text-sm font-bold mb-2">About Content:</label>
+                        <textarea id="about_content" name="about_content" rows="8" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="team_content" class="block text-gray-700 text-sm font-bold mb-2">Team Content:</label>
+                        <textarea id="team_content" name="team_content" rows="8" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="mission_content" class="block text-gray-700 text-sm font-bold mb-2">Mission Content:</label>
+                        <textarea id="mission_content" name="mission_content" rows="8" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="join_content" class="block text-gray-700 text-sm font-bold mb-2">Join Us Content:</label>
+                        <textarea id="join_content" name="join_content" rows="8" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        <?php } ?>
     </section>
 
     <footer>

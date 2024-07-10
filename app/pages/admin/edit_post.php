@@ -27,7 +27,7 @@ if (isset($_GET['post_id'])) {
         try {
             $stmt = $conn->prepare("UPDATE posts SET title = ?, content = ?, category_id = ?, image_or_video_url = ? WHERE post_id = ?");
             $stmt->execute([$title, $content, $category_id, $image_or_video_url, $post_id]);
-            header("Location: admin_posts.php"); // Redirect to admin post management page
+            header("Location: posts"); // Redirect to admin post management page
             exit();
         } catch(PDOException $e) {
             echo "Error: " . $e->getMessage();

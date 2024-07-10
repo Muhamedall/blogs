@@ -1,4 +1,5 @@
 <?php
+ob_start(); // Start output buffering
 session_start();
 
 require "../app/core/init.php";
@@ -15,4 +16,10 @@ if(file_exists($filename))
 }else
 {
 	require_once "../app/pages/404.php";
+
 }
+
+ob_end_flush();
+
+
+?>

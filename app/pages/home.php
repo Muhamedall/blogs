@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="mt-[70%] lg:mt-[5%]">
-            <div class="flex flex-row lg:ml-[3%]">
+            <div class=" ml-[5%] flex flex-row lg:ml-[3%] ">
                 <h1 class="bg-[#00AAA1] text-[#FFFFFF] font-bold text-2xl">Featured</h1>
                 <span class="text-xl font-bold mt-2 slide-in">This month<span>
             </div>
@@ -71,47 +71,41 @@
             </a>
         </div>
         <div class="mt-[5%]">
-            <div class="flex flex-row lg:ml-[3%] ">
+            <div class="ml-[5%] flex flex-row lg:ml-[3%] ">
                 <h1 class="bg-[#00AAA1] text-[#FFFFFF] font-bold text-2xl">YouTube</h1>
                 <span class="text-xl font-bold mt-2 slide-in">Posts<span>
             </div>
-            <div id="app"></div>
-            <div class="lg:grid lg:grid-cols-6 lg:gap-[2%] w-[100%]" id="videos"></div>
+            <div id="app "></div>
+            <div class="lg:grid lg:grid-cols-6 lg:gap-[2%] w-[100%] ml-[5%]" id="videos"></div>
             <div class="flex justify-center mt-4">
                 <a href="https://www.youtube.com/channel/UC4muHgvt5FNOUm-lxvMB6TQ" class="bg-[#00AAA1] text-white font-bold py-2 px-4 rounded" target="_blank">
                     More Videos
                 </a>
             </div>
         </div>
-        <div class="flex flex-row lg:ml-[3%] mt-8 fade-in">
+        <div class="ml-[5%] flex flex-row lg:ml-[3%] mt-8 fade-in">
   <h1 class="bg-[#00AAA1] text-[#FFFFFF] font-bold text-2xl">Today’s</h1>
   <span class="text-xl font-bold mt-2 slide-in">update</span>
 </div>
 
-<div id="todays-update" class="lg:ml-[5%] mt-4 p-4 bg-white shadow rounded-lg flex flex-row gap-[20%]">
-  <div class="static bg-[#F2F8F7] p-2 ml-[15%] rounded-xl fade-in">
+<div id="todays-update" class="  ml-[5%] mt-4 lg:p-4 bg-white shadow rounded-lg lg:flex lg:flex-row lg:gap-[20%]">
+  <div class="static bg-[#F2F8F7] p-2 lg:ml-[15%] rounded-xl fade-in">
     <h1 class="text-[#00AAA1] font-bold">New post           
-      <svg class="absolute" xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-        <path d="M120-120v-720h720v720H120Zm600-160H240v60h480v-60Zm-480-60h480v60H240v-60Zm0-140h480v-240H240v240Zm0 200v60-60Zm0-60v-60 60Zm0-140v-240 240Zm0 80v-80 80Zm0 120v-60 60Z"/>
-      </svg>
+      
       <span id="update-posts"></span>
     </h1>
   </div>
-  <div class="static bg-[#F2F8F7] p-2 rounded-xl fade-in">
+  <div class=" static bg-[#F2F8F7] p-2 rounded-xl fade-in">
     <h1 class="text-[#00AAA1] font-bold">Visitors Today
       <span id="update-visitors"></span>
     </h1>
-    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-      <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/>
-    </svg>
+    
   </div>
   <div class="static bg-[#F2F8F7] p-2 rounded-xl fade-in">
     <h1 class="text-[#00AAA1] font-bold">Subscribers Today
       <span id="update-subscribers"></span>
     </h1>
-    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368">
-      <path d="M160-80q-33 0-56.5-23.5T80-160v-400q0-33 23.5-56.5T160-640h640q33 0 56.5 23.5T880-560v400q0 33-23.5 56.5T800-80H160Zm0-80h640v-400H160v400Zm240-40 240-160-240-160v320ZM160-680v-80h640v80H160Zm120-120v-80h400v80H280ZM160-160v-400 400Z"/>
-    </svg>
+    
   </div>
 </div>
     </section>

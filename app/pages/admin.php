@@ -1,4 +1,5 @@
 <?php
+
 require_once '../app/pages/admin/profile-manager.php';
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
   header("Location: " . ROOT . "/login");
@@ -20,7 +21,7 @@ $id       = $url[3] ?? 0;
 $filename = "../app/pages/admin/".$section.".php";
 if (!file_exists($filename)) {
   
-    $filename = "../app/pages/admin/404.php";
+    $filename = "../app/pages/admin/dashbord.php";
 } 
 
 
@@ -35,6 +36,7 @@ elseif ($section == 'profile') {
 elseif ($section == 'settings') {
   require_once "../app/pages/admin/manager-settings.php";
 }
+
 ?>
 
 
